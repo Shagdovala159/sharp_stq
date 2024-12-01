@@ -75,12 +75,13 @@
         "composer dump-autoload"
     ],
     "refresh-db": [
-        "rm -fr storage/app/public/*",
-        "mkdir storage/app/public/_thumbs",
-        "mkdir storage/app/public/uploads",
-        "chmod 0777 storage/app/public/_thumbs storage/app/public/uploads",
-        "@php artisan migrate:refresh --seed",
-        "@php artisan storage:link"
+        "rmdir /s /q storage\\app\\public\\*",
+        "mkdir storage\\app\\public\\_thumbs",
+        "mkdir storage\\app\\public\\uploads",
+        "icacls storage\\app\\public\\_thumbs /grant Everyone:(F)",
+        "icacls storage\\app\\public\\uploads /grant Everyone:(F)",
+        "php artisan migrate:refresh --seed",
+        "php artisan storage:link"
     ],
     "test": [
         "php artisan test --env=testing"
